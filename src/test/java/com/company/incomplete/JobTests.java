@@ -39,43 +39,43 @@ public class JobTests {
         Assertions.assertEquals("Product tester", job3.getName());
 
         Assertions.assertNotNull(job3.getEmployer());
-        Assertions.assertTrue(job3.getEmployer().getValue().equals("ACME"));
+        Assertions.assertEquals("ACME", job3.getEmployer().getValue());
 
-        Assertions.assertTrue(job3.getLocation() != null);
-        Assertions.assertTrue(job3.getLocation().getValue().equals("Desert"));
+        Assertions.assertNotNull(job3.getLocation());
+        Assertions.assertEquals("Desert", job3.getLocation().getValue());
 
-        Assertions.assertTrue(job3.getPositionType() != null);
-        Assertions.assertTrue(job3.getPositionType().getValue().equals("Quality control"));
+        Assertions.assertNotNull(job3.getPositionType());
+        Assertions.assertEquals("Quality control", job3.getPositionType().getValue());
 
-        Assertions.assertTrue(job3.getCoreCompetency() != null);
-        Assertions.assertTrue(job3.getCoreCompetency().getValue().equals("Persistence"));
+        Assertions.assertNotNull(job3.getCoreCompetency());
+        Assertions.assertEquals("Persistence", job3.getCoreCompetency().getValue());
     }
 
     @Test
     public void testJobsForEquality() {
-        Assertions.assertFalse(job4.equals(job5));
+        Assertions.assertNotEquals(job4, job5);
     }
 
     // I found the instructions around the three toString() tests a little confusing, so I created three tests following the three bullet points:
     // you can follow TDD if you want, or you can write the implementation first and then get the tests to pass, either is a fine approach
     @Test
     public void testToStringContainsBlankLines() {
-        Assertions.assertTrue(job5.toString().equals("\n" + job5.toString().trim() + "\n"));
+        Assertions.assertEquals(job5.toString(), "\n" + job5.toString().trim() + "\n");
     }
 
     @Test
     public void testToStringHasLabelsForEachField() {
-        Assertions.assertTrue(job5.toString().equals("\nID: 5\nName: Product person\nEmployer: MARS\nLocation: Brazil\nPosition Type: Quality control\nCore Competency: Java\n"));
+        Assertions.assertEquals("\nID: 5\nName: Product person\nEmployer: MARS\nLocation: Brazil\nPosition Type: Quality control\nCore Competency: Java\n", job5.toString());
     }
 
     @Test
     public void testToStringDataNotAvailable() {
-        Assertions.assertTrue(job6.toString().equals("\nID: 6\nName: Product person\nEmployer: Data not available\nLocation: Data not available\nPosition Type: Quality control\nCore Competency: Java\n"));
+        Assertions.assertEquals("\nID: 6\nName: Product person\nEmployer: Data not available\nLocation: Data not available\nPosition Type: Quality control\nCore Competency: Java\n", job6.toString());
     }
 
     @Test
     public void testOnlyIdField() {
-        Assertions.assertTrue(job7.toString().equals("OOPS! This job does not seem to exist."));
-        Assertions.assertTrue(job8.toString().equals("OOPS! This job does not seem to exist."));
+        Assertions.assertEquals("OOPS! This job does not seem to exist.", job7.toString());
+        Assertions.assertEquals("OOPS! This job does not seem to exist.", job8.toString());
     }
 }
